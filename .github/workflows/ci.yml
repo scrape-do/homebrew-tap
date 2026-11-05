@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: Apache-2.0
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+# GitHub-hosted only and no token use: the org's IP allow list rejects token
+# calls from GitHub-hosted runners, and everything this job needs (the release
+# archives on GitHub) is a public, anonymous download.
+
+jobs:
+  # The formulae job installs only the runner's platform (macOS arm64), so the
+  # Intel and Linux entries would go untested there. This job downloads every
+  # archive a formula names and compares it with the formula's sha256.
+  hashes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check every url and sha256
+        run: |
+          set -euo pipefail
+          for f in Formula/*.rb; do
+            pairs="$(paste -d' ' \
+              <(grep -oE 'url "[^"]+"' "$f" | cut -d'"' -f2) \
+              <(grep -oE 'sha256 "[^"]+"' "$f" | cut -d'"' -f2))"
+            # One pair per platform: macOS and Linux, each arm64 and Intel.
+            count="$(grep -c . <<<"$pairs" || true)"
+            if [ "$count" -ne 4 ]; then
+              echo "::error file=$f::expected 4 url/sha256 pairs, found $count"
+              exit 1
+            fi
+            while read -r url hash; do
+              got="$(curl -fsSL --retry 3 "$url" | sha256sum | cut -d' ' -f1)"
+              if [ "$got" != "$hash" ]; then
+                echo "::error file=$f::$url has sha256 $got, formula says $hash"
+                exit 1
+              fi
+              echo "ok $url"
+            done <<<"$pairs"
+          done
+
+  formulae:
+    runs-on: macos-latest
+    permissions:
+      contents: read
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_ANALYTICS: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Homebrew only lints, audits and tests formulae that live in a tap.
+      # Linking the checkout in as scrape-do/tap tests exactly the commit under
+      # review; `brew tap <path>` would clone the default branch instead.
+      - name: Tap the checkout
+        run: |
+          tap="$(brew --repository)/Library/Taps/scrape-do/homebrew-tap"
+          mkdir -p "$(dirname "$tap")"
+          rm -rf "$tap"
+          ln -s "$GITHUB_WORKSPACE" "$tap"
+      # Homebrew refuses to load formulae from a third-party tap that is not
+      # trusted (brew audit included); an older brew without the command has
+      # no such check.
+      - name: Trust the tap
+        run: |
+          if brew trust --help >/dev/null 2>&1; then
+            brew trust --tap scrape-do/tap
+          fi
+      - run: brew style Formula/
+      - run: brew audit --strict scrape-do/tap/sdo scrape-do/tap/sdo-mcp
+      - name: Install, test and uninstall each formula
+        run: |
+          for f in sdo sdo-mcp; do
+            brew install "scrape-do/tap/$f"
+            brew test "scrape-do/tap/$f"
+            brew uninstall "scrape-do/tap/$f"
+          done
