@@ -10,23 +10,23 @@ class Sdo < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.2.0/sdo_0.2.0_darwin_arm64.tar.gz"
-      sha256 "264f42b6fbeaa140c79cdaed62b644ced737bb994eb51250ae7bea8bcd0d954d"
+      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.3.0/sdo_0.3.0_darwin_arm64.tar.gz"
+      sha256 "0455f550b3f22a2f9600cc59340d1f429f0aa47f46d51b63be721d9f57617d4d"
     end
     on_intel do
-      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.2.0/sdo_0.2.0_darwin_amd64.tar.gz"
-      sha256 "904d2734b70f4f195fc87a98d9b58e306d5ca45f62971b1073d9017a878ed478"
+      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.3.0/sdo_0.3.0_darwin_amd64.tar.gz"
+      sha256 "d3ea5223f37dbf7106e97620bb9357752ea6c08d01284fc22eabd172ba9aaf2e"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.2.0/sdo_0.2.0_linux_arm64.tar.gz"
-      sha256 "f15faaeea486e9e1eb20e2d1ab3375c84158b59283b61c5567c2f1befd1742d0"
+      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.3.0/sdo_0.3.0_linux_arm64.tar.gz"
+      sha256 "f05779054c49c31a6e16f475855d7e57f78278f2c002f34e242a0f4915b124ca"
     end
     on_intel do
-      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.2.0/sdo_0.2.0_linux_amd64.tar.gz"
-      sha256 "6c3f0fcb296e9d7a10ae24a71bf1edeaf9fb4e66a1bc0b5ad84ec360cd54e154"
+      url "https://github.com/scrape-do/sdo-cli/releases/download/v0.3.0/sdo_0.3.0_linux_amd64.tar.gz"
+      sha256 "f913eaca884478e9cdde743b8de84d4353eea4aed4b19b5f2a06ecfdcf6c218c"
     end
   end
 
