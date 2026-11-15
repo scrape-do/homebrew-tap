@@ -10,23 +10,23 @@ class SdoMcp < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.0/sdo-mcp_0.3.0_darwin_arm64.tar.gz"
-      sha256 "e088c6adc9c7bb83cdfb23a6e69f42c281669c916dcc2e408f5f154c1b5d1862"
+      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.1/sdo-mcp_0.3.1_darwin_arm64.tar.gz"
+      sha256 "9c84832db25965edda36d86ac7c32e0b8ad4a534bfb28d5373d4ca71bc366097"
     end
     on_intel do
-      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.0/sdo-mcp_0.3.0_darwin_amd64.tar.gz"
-      sha256 "38410d51524c13285a55a511abf584060f9be02f7188608321406e9018c47560"
+      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.1/sdo-mcp_0.3.1_darwin_amd64.tar.gz"
+      sha256 "da9a8bd615b2f40b21ebc7064483a1addeeac8a903fa3f3f6c607f7c3b20e3d4"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.0/sdo-mcp_0.3.0_linux_arm64.tar.gz"
-      sha256 "f615eb13fd4eb8be7c91429fd4dd73c6febaa4df5c3eef50e5c2857d7e2ffdd3"
+      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.1/sdo-mcp_0.3.1_linux_arm64.tar.gz"
+      sha256 "26299c918372fd1c131116c66859baaf5057371b35ca70bdea19781aa633e229"
     end
     on_intel do
-      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.0/sdo-mcp_0.3.0_linux_amd64.tar.gz"
-      sha256 "405e359a351676f596a99c37d59f89e377c0b7647ae9e09f8a4584699a305e2c"
+      url "https://github.com/scrape-do/sdo-mcp/releases/download/v0.3.1/sdo-mcp_0.3.1_linux_amd64.tar.gz"
+      sha256 "ec4e778410e1bf097f79a0c6c4b869179a4a5749175fa3ca2b969683cadafd4a"
     end
   end
 
