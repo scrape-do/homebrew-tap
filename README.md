@@ -3,8 +3,8 @@
 
 [![ci](https://github.com/scrape-do/homebrew-tap/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/scrape-do/homebrew-tap/actions/workflows/ci.yml) [![license](https://img.shields.io/github/license/scrape-do/homebrew-tap)](LICENSE)
 
-The official [Homebrew](https://brew.sh) tap for the Scrape.do command-line tools, for macOS and Linux
-(Intel and Apple silicon / arm64).
+The official [Homebrew](https://brew.sh) tap for the Scrape.do command-line tools, for macOS (Apple silicon and
+Intel) and Linux (x86_64 and arm64).
 
 | Formula | What it installs |
 | ------- | ---------------- |
@@ -54,7 +54,7 @@ published to this tap.
 
 Because the release pipeline writes these files (the commits are by `scrape-do-publisher[bot]` and titled
 `sdo X.Y.Z` or `sdo-mcp X.Y.Z`), a hand edit here is overwritten by the next release. A change to a formula belongs
-in its template in `tools/pkgmanifests` of [sdo-cli](https://github.com/scrape-do/sdo-cli/tree/main/tools/pkgmanifests)
+in its template in `tools/pkgmanifests/main.go` of [sdo-cli](https://github.com/scrape-do/sdo-cli/tree/main/tools/pkgmanifests)
 or [sdo-mcp](https://github.com/scrape-do/sdo-mcp/tree/main/tools/pkgmanifests).
 
 ## Verifying a download
